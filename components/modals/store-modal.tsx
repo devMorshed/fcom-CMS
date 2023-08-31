@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,6 +17,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -23,6 +26,8 @@ const formSchema = z.object({
 
 export const StoreModal = () => {
   const storeModal = useStoreModal();
+
+  const [loading, setLoading] = useState(false);
 
   // form schema imported and implemented with hook form and zod
   const form = useForm<z.infer<typeof formSchema>>({
@@ -33,7 +38,16 @@ export const StoreModal = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      setLoading(true);
+      const response = await axios.post("/api/stores", values);
+      toast.success("Store Created");
+    } catch (error) {
+      toast.error("Something Went Wrong");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -53,17 +67,28 @@ export const StoreModal = () => {
                 <FormItem>
                   <FormLabel>Store Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter Store Name" {...field} />
+                    <Input
+                      disabled={loading}
+                      placeholder="Enter Store Name"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <div className="pt-6 flex items-center justify-end space-x-2">
-              <Button variant={"outline"} onClick={storeModal.onClose}>
+              <Button
+                disabled={loading}
+                variant={"outline"}
+                onClick={storeModal.onClose}
+              >
                 Cancel
               </Button>
-              <Button type="submit">Continue</Button>
+
+              <Button disabled={loading} type="submit">
+                Continue
+              </Button>
             </div>
           </form>
         </Form>
