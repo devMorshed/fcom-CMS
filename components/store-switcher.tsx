@@ -99,7 +99,7 @@ const StoreSwitch = ({ className, items = [] }: StoreSwitchProps) => {
                   storeModal.onOpen();
                 }}
               >
-                <PlusCircle /> Create Store
+                <PlusCircle className="mr-2 h-5 w-5 text-muted-foreground"/> Create Store
               </CommandItem>
             </CommandGroup>
           </CommandList>
