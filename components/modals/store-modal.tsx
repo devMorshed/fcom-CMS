@@ -79,6 +79,7 @@ export const StoreModal = () => {
             />
             <div className="pt-6 flex items-center justify-end space-x-2">
               <Button
+                type="button"
                 disabled={loading}
                 variant={"outline"}
                 onClick={storeModal.onClose}
