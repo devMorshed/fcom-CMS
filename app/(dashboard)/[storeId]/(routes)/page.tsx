@@ -1,4 +1,5 @@
 import prismadb from "@/lib/prismadb";
+import { UserProfile } from "@clerk/nextjs";
 
 interface DashboardPageProps {
   params: { storeId: string };
@@ -11,7 +12,12 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
     },
   });
 
-  return <div>Active Store: {store?.name}</div>;
+  return (
+    <div>
+      Active Store: {store?.name}
+      {/* <UserProfile /> */}
+    </div>
+  );
 };
 
 export default DashboardPage;
