@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
+import { AlertModal } from "@/components/modals/alert-modal";
 
 interface SettingsFormProps {
   initialData: Store;
@@ -55,8 +56,28 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
     }
   };
 
+  const onStoreDelete = async () => {
+    try {
+      setLoading(true);
+      await axios.delete(`/api/stores/${params.storeId}`);
+      router.refresh();
+      toast.success("Store Deleted");
+    } catch (error) {
+      console.log("[From Delete]", error);
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
+      <AlertModal
+        isOpen={open}
+        loading={loading}
+        onClose={() => setOpen(false)}
+        onConfirm={() => onStoreDelete()}
+      />
       <div className="flex items-center justify-between">
         <Hedding title="Settings" desc="Manage Store Preferences" />
         <Button
