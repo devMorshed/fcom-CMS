@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
-import Hedding from "@/components/ui/heading";
+import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import {
@@ -81,7 +81,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
         onConfirm={onStoreDelete}
       />
       <div className="flex items-center justify-between">
-        <Hedding title="Settings" desc="Manage Store Preferences" />
+        <Heading title="Settings" desc="Manage Store Preferences" />
         <Button
           disabled={loading}
           variant="destructive"
