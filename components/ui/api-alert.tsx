@@ -1,7 +1,9 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { ServerIcon } from "lucide-react";
+import { Copy, CopyCheckIcon, CopyIcon, ServerIcon } from "lucide-react";
 import { Badge, BadgeProps } from "./badge";
 import { Butterfly_Kids } from "next/font/google";
+import { Button } from "./button";
+import toast from "react-hot-toast";
 
 interface ApiAlertProps {
   title: string;
@@ -23,6 +25,12 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
   desc,
   variant = "public",
 }) => {
+
+  const onCopy = () => {
+    navigator.clipboard.writeText(desc);
+    toast.success("Copied");
+  };
+  
   return (
     <Alert className="">
       <ServerIcon className="h-4 w-4" />
@@ -34,6 +42,9 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
         <code className="relative bg-muted font-mono text-sm font-semibold rounded px-2 py-2">
           {desc}
         </code>
+        <Button variant={"outline"} size={"icon"} onClick={onCopy}>
+          <CopyIcon className="h-4 w-4" />
+        </Button>
       </AlertDescription>
     </Alert>
   );
