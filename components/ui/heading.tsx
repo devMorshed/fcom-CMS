@@ -4,7 +4,7 @@ interface HeddingProps {
   title: string;
   desc: string;
 }
-const Hedding: React.FC<HeddingProps> = ({ title, desc }) => {
+const Heading: React.FC<HeddingProps> = ({ title, desc }) => {
   return (
     <div>
       <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
@@ -13,4 +13,4 @@ const Hedding: React.FC<HeddingProps> = ({ title, desc }) => {
   );
 };
 
-export default Hedding;
+export default Heading;
