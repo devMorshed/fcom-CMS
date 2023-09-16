@@ -15,7 +15,7 @@ const BillboardPage = async ({
     <>
       <div className="flex-col">
         <div className="p-8 pt-6 flex-1">
-          <BillboardForm />
+          <BillboardForm initialData={billboard} />
         </div>
       </div>
     </>
