@@ -35,7 +35,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <div>
-      <p>Image Upload</p>
       <div className="mb-4 flex items-center gap-4">
         {value.map((url) => (
           <div
@@ -63,7 +62,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               variant={"secondary"}
               onClick={onClick}
             >
-              <ImagePlus className="h-4 w-4" />
+              <ImagePlus className="h-4 w-4 mr-2" />
+              Upload an image
             </Button>
           );
         }}
