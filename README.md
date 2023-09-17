@@ -43,6 +43,9 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 
 DATABASE_URL="postgres://morshed3074:lWxfaBcU3VG2@ep-quiet-credit-00476040.ap-southeast-1.aws.neon.tech/neondb"
 
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="duai1rnks"
+
+
 ```
 
 ##To change the database.
@@ -50,9 +53,11 @@ DATABASE_URL="postgres://morshed3074:lWxfaBcU3VG2@ep-quiet-credit-00476040.ap-so
 ```bash
 npx prisma migrate reset
 ```
+
 ```bash
 npx prisma migrate dev
 ```
+
 ```bash
 npx prisma db pull
 ```
