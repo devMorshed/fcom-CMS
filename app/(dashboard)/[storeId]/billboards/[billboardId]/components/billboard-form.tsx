@@ -8,6 +8,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import Heading from "@/components/ui/heading";
 import ImageUpload from "@/components/ui/image-upload";
@@ -67,7 +68,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
           data
         );
       }
-      router.refresh();
+      // router.refresh();
       toast.success(toastMsg);
     } catch (error) {
       console.log("BillBoard", error);
@@ -99,69 +100,71 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
     <>
       <AlertModal
         isOpen={open}
-        loading={loading}
         onClose={() => setOpen(false)}
         onConfirm={onDelete}
+        loading={loading}
       />
-
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <Heading title={title} desc={desc} />
-          {initialData && (
-            <Button
-              disabled={loading}
-              variant="destructive"
-              size="sm"
-              onClick={() => setOpen(true)}
-            >
-              <Trash className="h-4 w-4" />
-            </Button>
-          )}
-        </div>
-        <Separator />
-        <Form {...form}>
-          <form className="space-y-4 mt-4">
+      <div className="flex items-center justify-between">
+        <Heading title={title} desc={desc} />
+        {initialData && (
+          <Button
+            disabled={loading}
+            variant="destructive"
+            size="sm"
+            onClick={() => setOpen(true)}
+          >
+            <Trash className="h-4 w-4" />
+          </Button>
+        )}
+      </div>
+      <Separator />
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 w-full"
+        >
+          <FormField
+            control={form.control}
+            name="imgUrl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Background image</FormLabel>
+                <FormControl>
+                  <ImageUpload
+                    value={field.value ? [field.value] : []}
+                    disabled={loading}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange("")}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="md:grid md:grid-cols-3 gap-8">
             <FormField
-              name="imageUrl"
               control={form.control}
+              name="label"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Background Image</FormLabel>
+                  <FormLabel>Label</FormLabel>
                   <FormControl>
-                    <ImageUpload
+                    <Input
                       disabled={loading}
-                      onChange={(url) => field.onChange(url)}
-                      onRemove={() => field.onChange("")}
-                      value={field.value ? [field.value] : []}
+                      placeholder="Billboard label"
+                      {...field}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-            <div className="grid grid-cols-3 gap-8">
-              <FormField
-                name="label"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Label</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={loading}
-                        placeholder="Billboard Label"
-                        {...field}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-            <Button disabled={loading} className="ml-auto" type="submit">
-              {action}
-            </Button>
-          </form>
-        </Form>
-      </div>
+          </div>
+          <Button disabled={loading} className="ml-auto" type="submit">
+            {action}
+          </Button>
+        </form>
+      </Form>
     </>
   );
 };
