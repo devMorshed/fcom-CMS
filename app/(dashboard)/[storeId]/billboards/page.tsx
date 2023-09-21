@@ -12,17 +12,7 @@ const BillboardsPage = async () => {
       <div className="flex-1 space-y-4 p-8 pt-6">
         <BillboardClient />
       </div>
-      {Billb?.map((singbill) => (
-        <div key={singbill.id}>
-          <p>{singbill.label}</p>
-          <Image
-            src={singbill.imgUrl}
-            width={200}
-            height={200}
-            alt={singbill.label}
-          />
-        </div>
-      ))}
+       
     </div>
   );
 };
