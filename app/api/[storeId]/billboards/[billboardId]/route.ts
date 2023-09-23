@@ -4,15 +4,15 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { billbordId: string } }
+  { params }: { params: { billboardId: string } }
 ) {
   try {
-    if (!params.billbordId) {
+    if (!params.billboardId) {
       return new NextResponse("Billboard ID is required", { status: 400 });
     }
     const billboard = await prismadb.billboard.findUnique({
       where: {
-        id: params.billbordId,
+        id: params.billboardId,
       },
     });
     return NextResponse.json(billboard);
@@ -76,7 +76,7 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { billboardId: string, storeId: string } }
+  { params }: { params: { billboardId: string; storeId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -93,7 +93,7 @@ export async function DELETE(
       where: {
         id: params.storeId,
         userId,
-      }
+      },
     });
 
     if (!storeByUserId) {
@@ -103,12 +103,12 @@ export async function DELETE(
     const billboard = await prismadb.billboard.delete({
       where: {
         id: params.billboardId,
-      }
+      },
     });
-  
+
     return NextResponse.json(billboard);
   } catch (error) {
-    console.log('[BILLBOARD_DELETE]', error);
+    console.log("[BILLBOARD_DELETE]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
+}
