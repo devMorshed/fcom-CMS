@@ -47,7 +47,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
   const onSumbit = async (data: SettingsFormValues) => {
     try {
       setLoading(true);
-      await axios.patch(`/api/stores/${params.storeId}`, data);
+      await axios.patch(`/api/${params.storeId}`, data);
       router.refresh();
       toast.success("store updated");
     } catch (error) {
@@ -60,7 +60,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
   const onStoreDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}`);
+      await axios.delete(`/api/${params.storeId}`);
       router.refresh();
       toast.success("Store Deleted");
     } catch (error) {

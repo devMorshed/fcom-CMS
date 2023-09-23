@@ -66,7 +66,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
         await axios.post(`/api/${params.storeId}/billboards`, data);
       }
       router.refresh();
-      router.push(`/${params.storeId}/billboards`)
+      router.push(`/${params.storeId}/billboards`);
       toast.success(toastMsg);
     } catch (error) {
       console.log("BillBoard", error);
@@ -119,14 +119,13 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full"
+          className="space-y-4 w-full mt-4"
         >
           <FormField
             control={form.control}
             name="imgUrl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Background image</FormLabel>
                 <FormControl>
                   <ImageUpload
                     value={field.value ? [field.value] : []}
