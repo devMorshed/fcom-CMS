@@ -35,7 +35,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({
       onClose={onClose}
       
     >
-      <div className="pt-6 flex items-center justify-end">
+      <div className="pt-6 gap-2 flex items-center justify-end">
         <Button disabled={loading} variant={"outline"} onClick={onClose}>
           Cancel
         </Button>
