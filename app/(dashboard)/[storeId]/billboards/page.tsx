@@ -29,3 +29,4 @@ const BillboardsPage = async ({ params }: { params: { storeId: string } }) => {
 };
 
 export default BillboardsPage;
+ 
