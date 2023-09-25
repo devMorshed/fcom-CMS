@@ -7,7 +7,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, TrainTrack, Trash } from "lucide-react";
 import toast from "react-hot-toast";
@@ -15,10 +14,10 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { AlertModal } from "@/components/modals/alert-modal";
 import axios from "axios";
-import { CategoryColumns } from "./category-columns";
+import { CategoryColumn } from "./category-columns";
 
 interface CellActionProps {
-  data: CategoryColumns;
+  data: CategoryColumn;
 }
 
 const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -30,7 +29,7 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const onCopy = (billboardId: string) => {
     navigator.clipboard.writeText(billboardId);
-    toast.success("Billboard ID copied");
+    toast.success("Category ID copied");
   };
 
   const onDelete = async () => {
@@ -38,9 +37,9 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
       setLoading(true);
       await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
       router.refresh();
-      toast.success("Billboard Deleted");
+      toast.success("Category Deleted");
     } catch (error) {
-      console.log("BillBoard", error);
+      console.log("Category", error);
       toast.error("Something went wrong");
     } finally {
       setLoading(false);
