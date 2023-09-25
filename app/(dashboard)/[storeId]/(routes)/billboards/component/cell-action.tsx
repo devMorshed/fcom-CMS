@@ -27,7 +27,7 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [loadinng, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const onCopy = (billboardId: string) => {
+  const onCopy = (billboardId: string) => { 
     navigator.clipboard.writeText(billboardId);
     toast.success("Billboard ID copied");
   };
