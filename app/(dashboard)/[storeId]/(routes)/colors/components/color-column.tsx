@@ -7,6 +7,7 @@ export type ColorColumn = {
   id: string;
   name: string;
   value: string;
+  createdAt: string;
 };
 
 export const columns: ColumnDef<ColorColumn>[] = [
@@ -17,6 +18,19 @@ export const columns: ColumnDef<ColorColumn>[] = [
   {
     accessorKey: "value",
     header: "Value",
+  },
+  {
+    header: "Color",
+    cell: ({ row }) => (
+      <div
+        className="h-8 w-8 rounded-full border"
+        style={{ backgroundColor: row.original.value }}
+      />
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: "Date",
   },
   {
     id: "action",
