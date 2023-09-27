@@ -1,5 +1,6 @@
 "use client";
 
+import { AlertModal } from "@/components/modals/alert-modal";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -19,6 +20,7 @@ import { Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 interface ColorFormProps {
@@ -33,8 +35,6 @@ const formSchema = z.object({
 type ColorFormValues = z.infer<typeof formSchema>;
 
 const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
-  console.log(initialData);
-
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -58,11 +58,15 @@ const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
     try {
       setLoading(true);
       if (initialData) {
-        await axios.patch(`/api/${params.storeId}/colors/${params.id}`, data);
+        await axios.patch(
+          `/api/${params.storeId}/colors/${params.colorId}`,
+          data
+        );
       } else {
         await axios.post(`/api/${params.storeId}/colors`, data);
       }
       router.refresh();
+      toast.success(toastMsg);
       router.push(`/${params.storeId}/colors`);
     } catch (error) {
       console.log("ColForm", error);
@@ -71,12 +75,34 @@ const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
     }
   };
 
+  const onDelete = async () => {
+    try {
+      setLoading(true);
+      await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`);
+      router.refresh();
+      toast.success("Color Deleted");
+      router.push(`/${params.storeId}/colors`);
+    } catch (error) {
+      console.log("COL_DEL", error);
+      toast.error("Something Went Wrong");
+    } finally {
+      setLoading(false);
+      setOpen(false);
+    }
+  };
+
   return (
     <div>
+      <AlertModal
+        isOpen={open}
+        loading={loading}
+        onClose={() => setOpen(false)}
+        onConfirm={() => onDelete()}
+      />
       <div className="flex items-center justify-between pb-2">
         <Heading title={title} desc={desc} />
-        {!initialData && (
-          <Button variant={"destructive"}>
+        {initialData && (
+          <Button onClick={() => setOpen(true)} variant={"destructive"}>
             <Trash className="w-4 h-4" />
           </Button>
         )}

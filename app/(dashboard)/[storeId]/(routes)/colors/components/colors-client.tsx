@@ -32,8 +32,8 @@ const ColorsClient: React.FC<ColorsClientProps> = ({ initialData }) => {
       <Separator />
 
       <ApiList
-        entityIdName="color"
-        entityName="color"
+        entityIdName="colorId"
+        entityName="colors"
         title="Color API"
         desc="Colors API to manage"
       />
