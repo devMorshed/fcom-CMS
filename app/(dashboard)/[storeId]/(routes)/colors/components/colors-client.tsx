@@ -1,14 +1,17 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { DataTable } from "@/components/ui/data-table";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { Color } from "@prisma/client";
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
+import { ColorColumn, columns } from "./color-column";
+import ApiList from "@/components/ui/api-list";
 
 interface ColorsClientProps {
-  initialData: Color[];
+  initialData: ColorColumn[];
 }
 
 const ColorsClient: React.FC<ColorsClientProps> = ({ initialData }) => {
@@ -25,6 +28,15 @@ const ColorsClient: React.FC<ColorsClientProps> = ({ initialData }) => {
         </Button>
       </div>
       <Separator />
+      <DataTable columns={columns} data={initialData} searchKey="name" />
+      <Separator />
+
+      <ApiList
+        entityIdName="color"
+        entityName="color"
+        title="Color API"
+        desc="Colors API to manage"
+      />
     </>
   );
 };
