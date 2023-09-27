@@ -9,6 +9,8 @@ const ColorsPage = async ({ params }: { params: { storeId: string } }) => {
     },
   });
 
+  console.log(colors);
+
   return (
     <div className="flex-col p-8 pt-6">
       <ColorsClient initialData={colors} />
