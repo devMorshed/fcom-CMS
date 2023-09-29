@@ -141,7 +141,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         loading={loading}
       />
       <div className="flex items-center justify-between">
-        <Heading title={title} description={description} />
+        <Heading title={title} desc={description} />
         {initialData && (
           <Button
             disabled={loading}
