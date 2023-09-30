@@ -1,11 +1,10 @@
 import prismadb from "@/lib/prismadb";
 import { ProductForm } from "./components/product-form";
 
-
-const ProductsPage = async ({
+const ProductPage = async ({
   params,
 }: {
-  params: { storeId: string; productId: string };
+  params: { productId: string; storeId: string };
 }) => {
   const product = await prismadb.product.findUnique({
     where: {
@@ -23,28 +22,28 @@ const ProductsPage = async ({
     },
   });
 
-  const colors = await prismadb.color.findMany({
-    where: {
-      storeId: params.storeId,
-    },
-  });
   const sizes = await prismadb.size.findMany({
     where: {
       storeId: params.storeId,
     },
   });
 
+  const colors = await prismadb.color.findMany({
+    where: {
+      storeId: params.storeId,
+    },
+  });
 
   return (
     <div className="flex flex-col p-8 pt-6">
       <ProductForm
+        initialData={product}
         categories={categories}
         sizes={sizes}
         colors={colors}
-        initialData={product}
       />
     </div>
   );
 };
 
-export default ProductsPage;
+export default ProductPage;

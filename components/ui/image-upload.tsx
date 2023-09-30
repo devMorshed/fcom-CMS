@@ -35,39 +35,43 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <div>
-      <div className="mb-4 flex items-center">
+      <div className="mb-4 flex items-center gap-2">
         {value.map((url) => (
           <div
             key={url}
             className="relative w-[200px] h-[200px] rounded-md overflow-hidden"
           >
             <div className="absolute z-10 top-2 right-2">
-              <Button type="button">
+              <Button
+                type="button"
+                onClick={() => onRemove(url)}
+                variant={"destructive"}
+              >
                 <Trash className="h-4 w-4" />
               </Button>
             </div>
-            <Image fill src={url} className="object-cover" alt="Image" />
+            <Image sizes="200px" fill src={url} className="object-cover" alt="Image" />
           </div>
         ))}
+        <CldUploadWidget onUpload={onUpload} uploadPreset="d0lbfuv8">
+          {({ open }) => {
+            const onClick = () => {
+              open();
+            };
+            return (
+              <Button
+                type="button"
+                disabled={disabled}
+                variant={"secondary"}
+                onClick={onClick}
+              >
+                <ImagePlus className="h-4 w-4 mr-2" />
+                Upload an image
+              </Button>
+            );
+          }}
+        </CldUploadWidget>
       </div>
-      <CldUploadWidget onUpload={onUpload} uploadPreset="d0lbfuv8">
-        {({ open }) => {
-          const onClick = () => {
-            open();
-          };
-          return (
-            <Button
-              type="button"
-              disabled={disabled}
-              variant={"secondary"}
-              onClick={onClick}
-            >
-              <ImagePlus className="h-4 w-4 mr-2" />
-              Upload an image
-            </Button>
-          );
-        }}
-      </CldUploadWidget>
     </div>
   );
 };
