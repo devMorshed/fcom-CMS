@@ -1,4 +1,3 @@
-import { create } from "zustand";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import prismadb from "@/lib/prismadb";
