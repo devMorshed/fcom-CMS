@@ -48,9 +48,11 @@ const formSchema = z.object({
 type ProductFormValues = z.infer<typeof formSchema>;
 
 interface ProductFormProps {
-  initialData: Product & {
-    images : Image[]
-  } | null; 
+  initialData:
+    | (Product & {
+        images: Image[];
+      })
+    | null;
   categories: Category[];
   colors: Color[];
   sizes: Size[];
@@ -155,7 +157,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full"
+          className="space-y-8 w-full mt-6"
         >
           <FormField
             control={form.control}
@@ -181,7 +183,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               </FormItem>
             )}
           />
-          <div className="md:grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <FormField
               control={form.control}
               name="name"
@@ -233,9 +235,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                       <SelectTrigger>
                         <SelectValue
                           defaultValue={field.value}
-                          placeholder="Select a category" 
-                          
-
+                          placeholder="Select a category"
                         />
                       </SelectTrigger>
                     </FormControl>
