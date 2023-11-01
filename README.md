@@ -61,3 +61,6 @@ npx prisma migrate dev
 ```bash
 npx prisma db pull
 ```
+
+
+- things not clicking 
