@@ -64,3 +64,4 @@ npx prisma db pull
 
 
 -things clicking
+-tommorow codeDay
