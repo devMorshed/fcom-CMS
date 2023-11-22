@@ -63,4 +63,4 @@ npx prisma db pull
 ```
 
 
-- things not clicking 
+-things clicking
